@@ -19,21 +19,26 @@
 
             </div>
             <div class="col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                    <table class="table">
-                            <tr>
-                                <td>Name</td>
-                                <td><input type="text" class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <td>Rollnumber</td>
-                                <td><input type="text" class="form-control">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td><Button class="btn btn-primary">Submit</Button></td>
-                            </tr>
-                        </table> 
+            <form method="GET">
+    <table>
+<tr> 
+<td>NAME</td>    
+<td>  <input type="text" name="name"> </td>
+</tr>
+
+
+<tr>
+    <td>Roll Number</td>
+    <td> <input type="text" name="roll"> </td>
+</tr>
+
+<tr>
+    <td> </td>
+    <td><Button type="submit" class="btn btn-info" name="but">SUBMIT</Button> </td>
+</tr>
+
+    </table>
+    </form>
             </div>
             <div class="col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
@@ -43,3 +48,18 @@
    
 </body>
 </html>
+
+<?php
+if(isset($_GET['but']))
+{
+$num=$_GET['name'];
+$roll=$_GET['roll'];
+
+echo "<table class='table'>";
+echo "<tr> <td> NAME </td> <td> $num </td> </tr>";
+echo "<tr> <td> Rollno </td> <td> $roll </td> </tr>";
+echo "</table>";
+
+}
+
+?>

@@ -30,26 +30,27 @@
                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit tempore labore natus inventore asperiores, eius maxime laboriosam animi doloremque at facere! Corporis quos non possimus temporibus distinctio perspiciatis, obcaecati perferendis!
             </div>
 <div class="col col-12 col-sm-6">
+        <form method="GET">
         <table class="table"> 
                 <tr>
                     <td>name</td>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="name"></td>
                 </tr>
                 <tr>
                     <td>rollno</td>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="roll"></td>
                 </tr>
                 <tr>
                     <td>admission number</td>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="admsn"></td>
                 </tr>
                 <tr>
                     <td>college</td>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="colg"></td>
                 </tr>
                 <tr>
                     <td>mobile</td>
-                    <td><input type="text" class="form-control"></td>
+                    <td><input type="text" class="form-control" name="mob"></td>
                 </tr>
          
                 <tr>
@@ -58,7 +59,7 @@
                      password
                  </td>
                  <td>
-                     <input type="password" class="form-control">
+                     <input type="password" class="form-control" name="pass">
                  </td>
                 </tr>
          
@@ -69,7 +70,7 @@
                          dob
                      </td>
                      <td>
-                         <input type="date" class="form-control">
+                         <input type="date" class="form-control" name="dob">
                      </td>
                     </tr>
          
@@ -77,10 +78,10 @@
                     <td>
          
                     </td>
-                    <td><BUtton class="btn btn-info">SUBMIT</BUtton></td>
+                    <td><BUtton class="btn btn-info" name="but">SUBMIT</BUtton></td>
                 </tr>
             </table> 
-
+</form>
 </div>
 
         </div>
@@ -88,3 +89,27 @@
 
 </body>
 </html>
+
+<?php
+if(isset($_GET['but']))
+{
+$num=$_GET['name'];
+$roll=$_GET['roll'];
+$admsn=$_GET['admsn'];
+$col=$_GET['colg'];
+$mob=$_GET['mob'];
+$pass=$_GET['pass'];
+$dob=$_GET['dob'];
+echo "<table class='table'>";
+echo "<tr> <td> NAME </td> <td> $num </td> </tr>";
+echo "<tr> <td> Rollno </td> <td> $roll </td> </tr>";
+echo "<tr> <td> Admission no </td> <td> $admsn </td> </tr>";
+echo "<tr> <td> College </td> <td> $col </td> </tr>";
+echo "<tr> <td> Mobile </td> <td> $mob </td> </tr>";
+echo "<tr> <td> Password </td> <td> $pass </td> </tr>";
+echo "<tr> <td> DOB </td> <td> $dob </td> </tr>";
+echo "</table>";
+
+}
+
+?>

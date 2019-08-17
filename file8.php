@@ -20,41 +20,43 @@
 
             </div>
             <div class="col">
+                <form method="GET">
                 <table class="table">
                     <tr>
                         <td>Product Name</td>
-                        <td><input type="text" class="form-control"></td>
+                        <td><input type="text" class="form-control" name="pname"></td>
                     </tr>
                     <tr>
                         <td>Available Quantity</td>
-                        <td><input type="number" class="form-control"></td>
+                        <td><input type="number" class="form-control" name="aqnt"></td>
                     </tr>
                     <tr>
                         <td>Price</td>
-                        <td><input type="text" class="form-control"></td>
+                        <td><input type="text" class="form-control" name="price"></td>
                     </tr>
                     <tr>
                         <td>Description</td>
-                        <td><textarea class="form-control" cols="30" rows="3"></textarea></td>
+                        <td><textarea class="form-control" cols="30" rows="3" name="des"></textarea></td>
                     </tr>
                     <tr>
                         <td>Model</td>
-                        <td><input type="text" class="form-control"></td>
+                        <td><input type="text" class="form-control" name="model"></td>
                     </tr>
                     <tr>
                         <td>Year</td>
-                        <td><input type="date" class="form-control"></td>
+                        <td><input type="date" class="form-control" name="yr"></td>
                     </tr>
                     <tr>
                         <td>Dealer Name</td>
-                        <td><input type="text" class="form-control"></td>
+                        <td><input type="text" class="form-control" name="dname"></td>
                     </tr>
                     <tr>
                             <td><Button class="btn btn-success" type="reset">Reset</Button></td>
-                            <td><Button class="btn btn-info">Submit</Button></td>
+                            <td><Button class="btn btn-info" type="submit" name="but">Submit</Button></td>
                     </tr>
 
                 </table>
+                </form>
             </div>
             <div class="col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
 
@@ -63,3 +65,30 @@
     </div>
 </body>
 </html>
+
+<?php
+
+if(isset($_GET['but']))
+{
+$mname=$_GET['pname'];
+$dirct=$_GET['aqnt'];
+$actress=$_GET['price'];
+$actor=$_GET['des'];
+$camera=$_GET['model'];
+$producer=$_GET['yr'];
+$editing=$_GET['dname'];
+
+
+echo "<table class='table'>";
+echo "<tr> <td> Product Name </td> <td> $mname </td> </tr>";
+echo "<tr> <td> Available Quantity </td> <td> $dirct</td> </tr>";
+echo "<tr> <td> Price </td> <td> $actress </td> </tr>";
+echo "<tr> <td> Description </td> <td> $actor </td> </tr>";
+echo "<tr> <td> Model</td> <td> $camera </td> </tr>";
+echo "<tr> <td> Year </td> <td> $producer </td> </tr>";
+echo "<tr> <td> Dealer Name </td> <td> $editing </td> </tr>";
+echo "</table>";
+
+}
+
+?>
