@@ -73,7 +73,7 @@
                                     </tr>
                                     <tr>
                                         <td>Password</td>
-                                        <td><input type="password" class="form-control" name="pass"></td>
+                                        <td><input type="password" class="form-control" name="pswd"></td>
                                     </tr>
                                     <tr>
                                         <td>Confirm Password</td>
@@ -111,12 +111,12 @@ $name=$_GET['name'];
 $adrs=$_GET['addrs'];
 $dist=$_GET['dist'];
 $mob=$_GET['mob'];
-$usr=$_GET['usr'];
-$pass=$_GET['pass'];
+$usr=$_GET['usrnm'];
+$pass=$_GET['pswd'];
 
 echo "<table class='table'>";
 echo "<tr> <td> Name </td> <td> $name </td> </tr>";
-echo "<tr> <td> Address </td> <td> $add </td> </tr>";
+echo "<tr> <td> Address </td> <td> $adrs </td> </tr>";
 echo "<tr> <td> District </td> <td> $dist </td> </tr>";
 echo "<tr> <td> Mobile </td> <td> $mob </td> </tr>";
 echo "<tr> <td> Username</td> <td> $usr </td> </tr>";

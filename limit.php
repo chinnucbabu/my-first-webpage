@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4"></div>
             <div class="col col-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-<form method="GET">
+<form method="POST">
 
 
 
@@ -48,22 +48,24 @@
 </html>
 
 <?php
-if(isset($_GET['but']))
+if(isset($_POST['but']))
 {
-    $fnum=$_GET['num1'];
-    $snum=$_GET['num2'];
+    $fnum=$_POST['num1'];
+    $snum=$_POST['num2'];
     for($i=$fnum;$i<=$snum;$i++)
     {
-        for($j=$fnum;$j<=$i;$j++)
+        $count=0;
+        for($j=1;$j<=$i;$j++)
         {
+            
             if(($i%$j)==0)
         
             {
                 
-                break;
+               $count++;
             }
         }
-        if($j==$i)
+        if($count==2)
     {
         echo $i;
         echo "<br>";
