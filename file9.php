@@ -22,10 +22,7 @@
            <div class="col">
                <form method="GET">
                 <table class="table">
-                    <tr>
-                        <td>Employee Id</td>
-                        <td><input type="number" class="form-control" name="id"></td>
-                    </tr>
+                    
                     <tr>
                         <td>Employee name</td>
                         <td><input type="text" class="form-control" name="ename"></td>
@@ -70,25 +67,33 @@
 
 if(isset($_GET['but']))
 {
-$mname=$_GET['id'];
-$dirct=$_GET['ename'];
-$actress=$_GET['desg'];
-$actor=$_GET['slry'];
-$camera=$_GET['plc'];
-$producer=$_GET['mob'];
-$editing=$_GET['ainc'];
+
+$ename=$_GET['ename'];
+$des=$_GET['desg'];
+$slry=$_GET['slry'];
+$plc=$_GET['plc'];
+$mobile=$_GET['mob'];
+$aninc=$_GET['ainc'];
 
 
-echo "<table class='table'>";
-echo "<tr> <td> Employee ID </td> <td> $mname </td> </tr>";
-echo "<tr> <td> Employee Name </td> <td> $dirct</td> </tr>";
-echo "<tr> <td> Designation </td> <td> $actress </td> </tr>";
-echo "<tr> <td> Salary </td> <td> $actor </td> </tr>";
-echo "<tr> <td> Place</td> <td> $camera </td> </tr>";
-echo "<tr> <td> Mobile </td> <td> $producer </td> </tr>";
-echo "<tr> <td> Annual Income </td> <td> $editing </td> </tr>";
-echo "</table>";
+$servrnm="localhost";
+$usernm="root";
+$password="";
+$dbname="employee";
 
+$con= new mysqli($servrnm,$usernm,$password,$dbname);
+$sql="INSERT INTO `empinfo`(`empname`, `description`, `salary`, `place`, `mobile`, `anninc`) VALUES ('$ename','$des',$slry,'$plc',$mobile,$aninc) ";
+
+$result=$con->query($sql);
+
+
+if($result===TRUE){
+    echo "success";
+}
+else{
+    echo $con->error;
+
+}
 }
 
 ?>

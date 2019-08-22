@@ -70,24 +70,31 @@
 
 if(isset($_GET['but']))
 {
-$mname=$_GET['pname'];
-$dirct=$_GET['aqnt'];
-$actress=$_GET['price'];
-$actor=$_GET['des'];
-$camera=$_GET['model'];
-$producer=$_GET['yr'];
-$editing=$_GET['dname'];
+$pname=$_GET['pname'];
+$avl=$_GET['aqnt'];
+$price=$_GET['price'];
+$desc=$_GET['des'];
+$model=$_GET['model'];
+$yr=$_GET['yr'];
+$dlrnm=$_GET['dname'];
 
 
-echo "<table class='table'>";
-echo "<tr> <td> Product Name </td> <td> $mname </td> </tr>";
-echo "<tr> <td> Available Quantity </td> <td> $dirct</td> </tr>";
-echo "<tr> <td> Price </td> <td> $actress </td> </tr>";
-echo "<tr> <td> Description </td> <td> $actor </td> </tr>";
-echo "<tr> <td> Model</td> <td> $camera </td> </tr>";
-echo "<tr> <td> Year </td> <td> $producer </td> </tr>";
-echo "<tr> <td> Dealer Name </td> <td> $editing </td> </tr>";
-echo "</table>";
+$servrnm="localhost";
+$usernm="root";
+$password="";
+$dbname="product";
+
+$con= new mysqli($servrnm,$usernm,$password,$dbname);
+ $sql= "INSERT INTO `prdct_dtls`( `prdctname`, `avlqty`, `price`, `description`, `model`, `year`, `dealernm`) VALUES('$pname',$avl,$price,'$desc','$model','$yr','$dlrnm')";
+
+$result=$con->query($sql);
+
+
+if($result===TRUE){
+    echo "success";
+}
+else{
+    echo $con->error;}
 
 }
 
