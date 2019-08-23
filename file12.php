@@ -58,13 +58,14 @@ $password="";
 $dbname="employee";
 
 $con= new mysqli($servrnm,$usernm,$password,$dbname);
-$sql="SELECT  `empname`, `description`, `salary`, `place`, `mobile`, `anninc` FROM `empinfo` WHERE `empname`='$ename'";
+$sql="SELECT `id`, `empname`, `description`, `salary`, `place`, `mobile`, `anninc` FROM `empinfo` WHERE `empname`='$ename'";
 $result=$con->query($sql);
 if($result->num_rows>0)
 {
 
 while($row=$result->fetch_assoc() )
 {
+    $id=$row['id'];
     $empname=$row['empname'];
     $d=$row['description'];
     $s=$row['salary'];
@@ -72,14 +73,16 @@ while($row=$result->fetch_assoc() )
     $m=$row['mobile'];
     $i=$row['anninc'];
 
-    echo "<table class='table'>";
-echo "<tr> <td> Employee Name </td> <td> $empname </td> </tr>";
-echo "<tr> <td> Designation</td> <td> $d</td> </tr>";
-echo "<tr> <td> Salary</td> <td> $s</td> </tr>";
-echo "<tr> <td> Place </td> <td> $p</td> </tr>";
-echo "<tr> <td> Mobile </td> <td> $m</td> </tr>";
-echo "<tr> <td> Annual Income </td> <td> $i</td> </tr>";
-echo "</table>";
+    echo "<form method='POST'> <table class='table'>";
+ 
+echo "<tr> <td> Employee Name </td> <td> <input type='text' value='$empname' class='form-control' name='empnm' />  </td> </tr>";
+echo "<tr> <td> Designation</td> <td> <input type='text' value='$d' class='form-control' name='dsgn' /></td> </tr>";
+echo "<tr> <td> Salary</td> <td> <input type='text' value='$s' class='form-control' name='slry' /></td> </tr>";
+echo "<tr> <td> Place </td> <td> <input type='text' value='$p' class='form-control' name='plc' /></td> </tr>";
+echo "<tr> <td> Mobile </td> <td> <input type='text' value='$m' class='form-control' name='mob' /></td> </tr>";
+echo "<tr> <td> Annual Income </td> <td><input type='text' value='$i' class='form-control' name='inc' /></td> </tr>";
+echo "<tr> <td> </td> <td> <Button class='btn btn-info' type='submit' name='btn' value='$id'>Submit</Button></td></tr>";
+echo "</table> </form>";
 
 }
 
@@ -90,4 +93,37 @@ else{
 
 
 }
+
+if(isset($_POST['btn']))
+{
+
+    $id=$_POST['btn'];
+     $ename=$_POST['empnm'];
+     $desgn=$_POST['dsgn'];
+    $slry=$_POST['slry'];
+    $plc=$_POST['plc'];
+    $mob=$_POST['mob'];
+    $inc=$_POST['inc'];
+
+    $servrnm="localhost";
+    $usernm="root";
+    $password="";
+    $dbname="employee";
+
+   $con= new mysqli($servrnm,$usernm,$password,$dbname);
+   $sql="UPDATE `empinfo` SET `empname`='$ename',`description`='$desgn',`salary`=$slry,`place`='$plc',`mobile`=$mob,`anninc`=$inc WHERE `id`=$id";
+   $result=$con->query($sql);
+
+
+    if($result===TRUE)
+     {
+        echo "success";
+     }
+   else
+    {
+       echo $con->error;
+
+    }
+}
+
 ?>

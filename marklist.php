@@ -321,7 +321,7 @@ if(isset($_POST['but']))
     }
 
 
-    echo "<table class='table'>";
+    /*echo "<table class='table'>";
     echo "<tr> <td> Name </td> <td> $nm </td> </tr>";
     echo "<tr> <td> Register Number </td> <td> $rno </td> </tr>";
     echo "<tr> <td> College </td> <td> $col </td> </tr>";
@@ -340,6 +340,28 @@ if(isset($_POST['but']))
    echo "<table class='table'";
    echo "<tr> <td> Status </td> <td> $st </td> </tr>";
    echo "</table>";
+   */
+
+
+
+  $servrnm="localhost";
+  $usernm="root";
+  $password="";
+  $dbname="marklist";
+
+  $con= new mysqli($servrnm,$usernm,$password,$dbname);
+  $sql="INSERT INTO `marksheet`(`name`, `registerno`, `college`, `sem`, `sub1_nm`, `mrk1`, `tot1`, `sub2_nm`, `mrk2`, `tot2`, `sub3_nm`, `mrk3`, `tot3`, `sub4_nm`, `mrk4`, `tot4`) VALUES ('$nm',$rno,'$col',$sem,'$s1nm',$m1,$t1,'$s2nm',$m2,$t2,'$s3nm',$m3,$t3,'$s4nm',$m4,$t4)";
+  $result=$con->query($sql);
+
+
+if($result===TRUE){
+    echo "success";
+}
+else{
+    echo $con->error;
+
+}
+
 
 }
 

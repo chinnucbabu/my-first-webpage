@@ -52,7 +52,7 @@
                  </tr>
                  <tr>
                         <td>Released Year</td> 
-                        <td><input type="text" class="form-control" name="ryr"></td>
+                        <td><input type="date" class="form-control" name="ryr"></td>
                  </tr>
                  <tr>
                      <td></td>
@@ -84,7 +84,26 @@ $producer=$_GET['prdcr'];
 $editing=$_GET['edtng'];
 $ryear=$_GET['ryr'];
 
-echo "<table class='table'>";
+$servrnm="localhost";
+$usernm="root";
+$password="";
+$dbname="movie";
+
+$con= new mysqli($servrnm,$usernm,$password,$dbname);
+$sql="INSERT INTO `movie`( `movie_nm`, `director`, `actress`, `actor`, `camera`, `producer`, `editing`, `relesing_yr`) VALUES ('$mname','$dirct','$actress','$actor','$camera','$producer','$editing','$ryear')";
+$result=$con->query($sql);
+
+if($result===TRUE)
+  {
+       echo "success";
+   }
+   else 
+   {
+       echo $con->error;
+   
+   }
+   
+/*echo "<table class='table'>";
 echo "<tr> <td> Movie Name </td> <td> $mname </td> </tr>";
 echo "<tr> <td> Director </td> <td> $dirct</td> </tr>";
 echo "<tr> <td> Actress </td> <td> $actress </td> </tr>";
@@ -93,7 +112,7 @@ echo "<tr> <td> Camera</td> <td> $camera </td> </tr>";
 echo "<tr> <td> Producer </td> <td> $producer </td> </tr>";
 echo "<tr> <td> Editing </td> <td> $editing </td> </tr>";
 echo "<tr> <td> Released year </td> <td> $ryear </td> </tr>";
-echo "</table>";
+echo "</table>";*/
 
 }
 
