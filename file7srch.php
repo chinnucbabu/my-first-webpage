@@ -9,7 +9,7 @@
     <title>Document</title>
     <style>
             body{
-                background-image: url('./img2.jpg');
+                background-image: url('./img3.jpg');
             }
     </style>
 </head>
@@ -24,8 +24,8 @@
                 <table class="table">
                     
                     <tr>
-                        <td>Employee name</td>
-                        <td><input type="text" class="form-control" name="ename"></td>
+                        <td>Movie name</td>
+                        <td><input type="text" class="form-control" name="mname"></td>
                     </tr>
                     
                     <tr>
@@ -43,22 +43,23 @@
 </body>
 </html>
 
+
 <?php
 
 if(isset($_POST['but']))
 {
 
-$ename=$_POST['ename'];
+$mname=$_POST['mname'];
 
 
 
 $servrnm="localhost";
 $usernm="root";
 $password="";
-$dbname="employee";
+$dbname="movie";
 
 $con= new mysqli($servrnm,$usernm,$password,$dbname);
-$sql="SELECT `id`, `empname`, `description`, `salary`, `place`, `mobile`, `anninc` FROM `empinfo` WHERE `empname`like'$ename'%";
+$sql="SELECT `id`, `movie_nm`, `director`, `actress`, `actor`, `camera`, `producer`, `editing`, `relesing_yr` FROM `movie` WHERE `movie_nm` = '$mname ' ";
 $result=$con->query($sql);
 if($result->num_rows>0)
 {
@@ -66,21 +67,25 @@ if($result->num_rows>0)
 while($row=$result->fetch_assoc() )
 {
     $id=$row['id'];
-    $empname=$row['empname'];
-    $d=$row['description'];
-    $s=$row['salary'];
-    $p=$row['place'];
-    $m=$row['mobile'];
-    $i=$row['anninc'];
+    $mvname=$row['movie_nm'];
+    $dirc=$row['director'];
+    $act=$row['actress'];
+    $actor=$row['actor'];
+    $cam=$row['camera'];
+    $pro=$row['producer'];
+    $edt=$row['editing'];
+    $ryr=$row['relesing_yr'];
 
     echo "<form method='POST'> <table class='table'>";
  
-echo "<tr> <td> Employee Name </td> <td> <input type='text' value='$empname' class='form-control' name='empnm' />  </td> </tr>";
-echo "<tr> <td> Designation</td> <td> <input type='text' value='$d' class='form-control' name='dsgn' /></td> </tr>";
-echo "<tr> <td> Salary</td> <td> <input type='text' value='$s' class='form-control' name='slry' /></td> </tr>";
-echo "<tr> <td> Place </td> <td> <input type='text' value='$p' class='form-control' name='plc' /></td> </tr>";
-echo "<tr> <td> Mobile </td> <td> <input type='text' value='$m' class='form-control' name='mob' /></td> </tr>";
-echo "<tr> <td> Annual Income </td> <td><input type='text' value='$i' class='form-control' name='inc' /></td> </tr>";
+echo "<tr> <td> Movie Name </td> <td> <input type='text' value='$mvname' class='form-control' name='mvname' />  </td> </tr>";
+echo "<tr> <td> Director</td> <td> <input type='text' value='$dirc' class='form-control' name='dir' /></td> </tr>";
+echo "<tr> <td> Actress</td> <td> <input type='text' value='$act' class='form-control' name='act' /></td> </tr>";
+echo "<tr> <td> Actor </td> <td> <input type='text' value='$actor' class='form-control' name='actor' /></td> </tr>";
+echo "<tr> <td> Camera </td> <td> <input type='text' value='$cam' class='form-control' name='cam' /></td> </tr>";
+echo "<tr> <td> Producer </td> <td><input type='text' value='$pro' class='form-control' name='pro' /></td> </tr>";
+echo "<tr> <td> Editing </td> <td><input type='text' value='$edt' class='form-control' name='edt' /></td> </tr>";
+echo "<tr> <td> Releasing Year </td> <td><input type='text' value='$ryr' class='form-control' name='ryr' /></td> </tr>";
 echo "<tr>  <td> <Button class='btn btn-info' type='submit' name='btn' value='$id'>Submit</Button></td> <td> <Button class='btn btn-info' type='submit' name='butn' value='$id'>Delete</Button></td></tr>";
 echo "</table> </form>";
 
@@ -93,38 +98,41 @@ else{
 
 
 }
-
 if(isset($_POST['btn']))
 {
 
     $id=$_POST['btn'];
-     $ename=$_POST['empnm'];
-     $desgn=$_POST['dsgn'];
-    $slry=$_POST['slry'];
-    $plc=$_POST['plc'];
-    $mob=$_POST['mob'];
-    $inc=$_POST['inc'];
+     $mname=$_POST['mvname'];
+     $dir=$_POST['dir'];
+    $act=$_POST['act'];
+    $actor=$_POST['actor'];
+    $cam=$_POST['cam'];
+    $pro=$_POST['pro'];
+    $edt=$_POST['edt'];
+    $ryr=$_POST['ryr'];
+
 
     $servrnm="localhost";
     $usernm="root";
     $password="";
-    $dbname="employee";
+    $dbname="movie";
 
    $con= new mysqli($servrnm,$usernm,$password,$dbname);
-   $sql="UPDATE `empinfo` SET `empname`='$ename',`description`='$desgn',`salary`=$slry,`place`='$plc',`mobile`=$mob,`anninc`=s$inc WHERE `id`=$id";
+   $sql="UPDATE `movie` SET `movie_nm`='$mname',`director`='$dir',`actress`='$act',`actor`='$actor',`camera`='$cam',`producer`='$pro',`editing`='$edt',`relesing_yr`='$ryr' WHERE `id`=$id";
    $result=$con->query($sql);
 
 
-    if($result===TRUE)
-     {
-        echo "success";
-     }
-   else
+   if($result===TRUE)
     {
-       echo $con->error;
-
+       echo "success";
     }
+  else
+   {
+      echo $con->error;
+
+   }
 }
+
 if(isset($_POST['butn']))
 {
     $ide=$_POST['butn'];
@@ -132,16 +140,16 @@ if(isset($_POST['butn']))
     $servrnm="localhost";
     $usernm="root";
     $password="";
-    $dbname="employee";
+    $dbname="movie";
 
     $con= new mysqli($servrnm,$usernm,$password,$dbname);
-    $sql="DELETE FROM `empinfo` WHERE `id`=$ide";
+    $sql="DELETE FROM `movie` WHERE `id`=$ide";
     $result=$con->query($sql);
 
 
     if($result===TRUE)
      {
-        echo "Deleted employee info";
+        echo "Deleted movie info";
      }
    else
     {

@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Book search</title>
     <style>
             body{
-                background-image: url('./img2.jpg');
+                background-image: url('./img3.jpg');
             }
     </style>
 </head>
@@ -24,8 +24,8 @@
                 <table class="table">
                     
                     <tr>
-                        <td>Employee name</td>
-                        <td><input type="text" class="form-control" name="ename"></td>
+                        <td>Book name</td>
+                        <td><input type="text" class="form-control" name="bname"></td>
                     </tr>
                     
                     <tr>
@@ -43,44 +43,45 @@
 </body>
 </html>
 
+
 <?php
 
 if(isset($_POST['but']))
 {
 
-$ename=$_POST['ename'];
+$bname=$_POST['bname'];
 
 
 
 $servrnm="localhost";
 $usernm="root";
 $password="";
-$dbname="employee";
+$dbname="book";
 
 $con= new mysqli($servrnm,$usernm,$password,$dbname);
-$sql="SELECT `id`, `empname`, `description`, `salary`, `place`, `mobile`, `anninc` FROM `empinfo` WHERE `empname`like'$ename'%";
+$sql="SELECT `id`, `bookname`, `price`, `description`, `author`, `distributor` FROM `book_info` WHERE `bookname`='$bname'";
 $result=$con->query($sql);
+
 if($result->num_rows>0)
 {
 
 while($row=$result->fetch_assoc() )
 {
     $id=$row['id'];
-    $empname=$row['empname'];
-    $d=$row['description'];
-    $s=$row['salary'];
-    $p=$row['place'];
-    $m=$row['mobile'];
-    $i=$row['anninc'];
+    $bkname=$row['bookname'];
+    $price=$row['price'];
+    $descp=$row['description'];
+    $author=$row['author'];
+    $dist=$row['distributor'];
+    
 
     echo "<form method='POST'> <table class='table'>";
  
-echo "<tr> <td> Employee Name </td> <td> <input type='text' value='$empname' class='form-control' name='empnm' />  </td> </tr>";
-echo "<tr> <td> Designation</td> <td> <input type='text' value='$d' class='form-control' name='dsgn' /></td> </tr>";
-echo "<tr> <td> Salary</td> <td> <input type='text' value='$s' class='form-control' name='slry' /></td> </tr>";
-echo "<tr> <td> Place </td> <td> <input type='text' value='$p' class='form-control' name='plc' /></td> </tr>";
-echo "<tr> <td> Mobile </td> <td> <input type='text' value='$m' class='form-control' name='mob' /></td> </tr>";
-echo "<tr> <td> Annual Income </td> <td><input type='text' value='$i' class='form-control' name='inc' /></td> </tr>";
+echo "<tr> <td> Book Name </td> <td> <input type='text' value='$bkname' class='form-control' name='bkname' />  </td> </tr>";
+echo "<tr> <td> Price</td> <td> <input type='text' value='$price' class='form-control' name='price' /></td> </tr>";
+echo "<tr> <td> Description</td> <td> <input type='text' value='$descp' class='form-control' name='descp' /></td> </tr>";
+echo "<tr> <td> Author </td> <td> <input type='text' value='$author' class='form-control' name='author' /></td> </tr>";
+echo "<tr> <td> Distributor </td> <td> <input type='text' value='$dist' class='form-control' name='dist' /></td> </tr>";
 echo "<tr>  <td> <Button class='btn btn-info' type='submit' name='btn' value='$id'>Submit</Button></td> <td> <Button class='btn btn-info' type='submit' name='butn' value='$id'>Delete</Button></td></tr>";
 echo "</table> </form>";
 
@@ -98,50 +99,49 @@ if(isset($_POST['btn']))
 {
 
     $id=$_POST['btn'];
-     $ename=$_POST['empnm'];
-     $desgn=$_POST['dsgn'];
-    $slry=$_POST['slry'];
-    $plc=$_POST['plc'];
-    $mob=$_POST['mob'];
-    $inc=$_POST['inc'];
+     $bname=$_POST['bkname'];
+     $prc=$_POST['price'];
+    $dscp=$_POST['descp'];
+    $athr=$_POST['author'];
+    $dtsb=$_POST['dist'];
+    
+
 
     $servrnm="localhost";
     $usernm="root";
     $password="";
-    $dbname="employee";
+    $dbname="book";
 
    $con= new mysqli($servrnm,$usernm,$password,$dbname);
-   $sql="UPDATE `empinfo` SET `empname`='$ename',`description`='$desgn',`salary`=$slry,`place`='$plc',`mobile`=$mob,`anninc`=s$inc WHERE `id`=$id";
+   $sql="UPDATE `book_info` SET `bookname`='$bname',`price`=$prc,`description`='$dscp',`author`='$athr',`distributor`='$dist' WHERE `id`=$id";
+   if($result===TRUE)
+   {
+      echo "success";
+   }
+ else
+  {
+     echo $con->error;
+
+  }
+}
+
+if(isset($_POST['butn']))
+{
+   $ide=$_POST['butn'];
+
+   $servrnm="localhost";
+   $usernm="root";
+   $password="";
+   $dbname="book";
+
+   $con= new mysqli($servrnm,$usernm,$password,$dbname);
+   $sql="DELETE FROM `book_info` WHERE `id`=$ide";
    $result=$con->query($sql);
 
 
     if($result===TRUE)
      {
-        echo "success";
-     }
-   else
-    {
-       echo $con->error;
-
-    }
-}
-if(isset($_POST['butn']))
-{
-    $ide=$_POST['butn'];
-
-    $servrnm="localhost";
-    $usernm="root";
-    $password="";
-    $dbname="employee";
-
-    $con= new mysqli($servrnm,$usernm,$password,$dbname);
-    $sql="DELETE FROM `empinfo` WHERE `id`=$ide";
-    $result=$con->query($sql);
-
-
-    if($result===TRUE)
-     {
-        echo "Deleted employee info";
+        echo "Deleted book info";
      }
    else
     {
