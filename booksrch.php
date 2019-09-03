@@ -59,7 +59,7 @@ $password="";
 $dbname="book";
 
 $con= new mysqli($servrnm,$usernm,$password,$dbname);
-$sql="SELECT `id`, `bookname`, `price`, `description`, `author`, `distributor` FROM `book_info` WHERE `bookname`='$bname'";
+$sql="SELECT `id`, `bookname`, `price`, `description`, `author`, `distributor` FROM `book_info` WHERE `bookname` like '%$bname%'";
 $result=$con->query($sql);
 
 if($result->num_rows>0)
