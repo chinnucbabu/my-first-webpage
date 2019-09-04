@@ -1,9 +1,9 @@
 <?php
 
-if(isset($_GET['pname']))
+if(isset($_POST['pname']))
 {
  
-     $productname=$_GET['pname'];
+     $productname=$_POST['pname'];
 
 $servrnm="localhost";
 $usernm="root";

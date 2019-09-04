@@ -11,14 +11,14 @@ $password="";
 $dbname="college";
 
 $con= new mysqli($servrnm,$usernm,$password,$dbname);
-$sql="SELECT `id`, `name`, `rollno`, `admissionno`, `college` FROM `students` WHERE `name`like '%$studentname%'";
+$sql="SELECT `id`, `name`, `rollno`, `admissionno`, `college` FROM `students` WHERE `name`= '$studentname'";
 $result=$con->query($sql);
 if($result->num_rows>0)
 {
   $r=array();
 while($row=$result->fetch_assoc() )
 {
-    $r[]=$row;
+    $r["result"][]=$row;
 }
  echo json_encode($r);
 }
